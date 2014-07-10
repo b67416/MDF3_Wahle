@@ -1,6 +1,7 @@
 package com.ryanwahle.videoanalyzer;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -21,6 +22,15 @@ public class PlayerActivity extends Activity implements MediaPlayer.OnPreparedLi
         Intent intent = getIntent();
         Uri videoUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
         Log.v("videoURI: ", "" + videoUri);
+
+        if (videoUri == null) {
+            AlertDialog.Builder noVideoAlertDialog = new AlertDialog.Builder(this);
+
+            noVideoAlertDialog.setTitle("Opps . . .");
+            noVideoAlertDialog.setMessage("This application can only be opened when you share a video file though other applications.");
+            noVideoAlertDialog.setCancelable(false);
+            noVideoAlertDialog.create().show();
+        }
 
         VideoView playerVideoView = (VideoView) findViewById(R.id.playerVideoView);
         MediaController playerMediaController = new MediaController(this);
