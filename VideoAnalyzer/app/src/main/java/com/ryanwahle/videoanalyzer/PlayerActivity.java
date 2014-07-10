@@ -2,7 +2,6 @@ package com.ryanwahle.videoanalyzer;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -45,8 +44,29 @@ public class PlayerActivity extends Activity implements MediaPlayer.OnPreparedLi
         Integer videoWidth = mediaPlayer.getVideoWidth();
         Integer videoHeight = mediaPlayer.getVideoHeight();
 
-        textViewTotalDuration.setText(totalDuration.toString() + " ms");
+        textViewTotalDuration.setText(stringForTime(totalDuration));
         textViewVideoWidth.setText(videoWidth.toString() + " px");
         textViewVideoHeight.setText(videoHeight.toString() + " px");
     }
+
+    /*
+        This function was found in widget/MediaController.java while looking
+        through the Android Source Code. It has been changed to work within my code.
+        I wonder why Google did not make this a public function??
+     */
+
+    public String stringForTime(int timeMs) {
+        int totalSeconds = timeMs / 1000;
+
+        int seconds = totalSeconds % 60;
+        int minutes = (totalSeconds / 60) % 60;
+        int hours = totalSeconds / 3600;
+
+        if (hours > 0) {
+            return String.format("%d:%02d:%02d", hours, minutes, seconds);
+        } else {
+            return String.format("%02d:%02d", minutes, seconds);
+        }
+    }
+
 }

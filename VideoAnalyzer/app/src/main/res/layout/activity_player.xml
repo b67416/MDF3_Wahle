@@ -31,7 +31,8 @@
             android:text="Total Duration"
             android:id="@+id/textView2"
             android:layout_gravity="center"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_orange_dark" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,7 +51,8 @@
             android:id="@+id/textView3"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_orange_dark" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,7 +71,8 @@
             android:id="@+id/textView4"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_orange_dark" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -79,6 +82,13 @@
             android:id="@+id/textViewVideoHeight"
             android:layout_gravity="center"
             android:layout_marginTop="5dp" />
+
+        <ImageView
+            android:layout_width="136dp"
+            android:layout_height="120dp"
+            android:id="@+id/imageView"
+            android:layout_gravity="center"
+            android:src="@drawable/icon_white" />
     </LinearLayout>
 
 
