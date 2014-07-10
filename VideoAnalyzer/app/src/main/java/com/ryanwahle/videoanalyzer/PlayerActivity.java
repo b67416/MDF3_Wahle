@@ -1,33 +1,52 @@
 package com.ryanwahle.videoanalyzer;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.media.MediaMetadataRetriever;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
 import android.widget.MediaController;
+import android.widget.TextView;
 import android.widget.VideoView;
 
 
-public class PlayerActivity extends Activity {
+public class PlayerActivity extends Activity implements MediaPlayer.OnPreparedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
 
-        //String videoURLString = "android.resource://com.ryanwahle.videoanalyzer/" + R.raw.testvideo;
-        String videoURLString = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
+        Intent intent = getIntent();
+        Uri videoUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
+        Log.v("videoURI: ", "" + videoUri);
 
         VideoView playerVideoView = (VideoView) findViewById(R.id.playerVideoView);
-        playerVideoView.setVideoURI(Uri.parse(videoURLString));
-
         MediaController playerMediaController = new MediaController(this);
-        playerMediaController.setAnchorView(playerVideoView);
 
+        playerVideoView.setVideoURI(videoUri);
         playerVideoView.setMediaController(playerMediaController);
+        playerVideoView.setOnPreparedListener(this);
 
         playerVideoView.start();
+    }
 
+    @Override
+    public void onPrepared(MediaPlayer mediaPlayer) {
+        Log.v("MEDIA: ", "READY");
+
+        TextView textViewTotalDuration = (TextView) findViewById(R.id.textViewTotalDuration);
+        TextView textViewVideoWidth = (TextView) findViewById(R.id.textViewVideoWidth);
+        TextView textViewVideoHeight = (TextView) findViewById(R.id.textViewVideoHeight);
+
+        Integer totalDuration = mediaPlayer.getDuration();
+        Integer videoWidth = mediaPlayer.getVideoWidth();
+        Integer videoHeight = mediaPlayer.getVideoHeight();
+
+        textViewTotalDuration.setText(totalDuration.toString() + " ms");
+        textViewVideoWidth.setText(videoWidth.toString() + " px");
+        textViewVideoHeight.setText(videoHeight.toString() + " px");
     }
 }
