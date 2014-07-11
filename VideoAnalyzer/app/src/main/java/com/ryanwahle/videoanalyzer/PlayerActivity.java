@@ -1,3 +1,18 @@
+/*
+    Author:     Ryan Wahle
+
+    Project:    Video Analyzer
+
+    Package:    com.ryanwahle.videoanalyzer
+
+    File:       PlayerActivity.java
+
+    Purpose:    This Activity is launched from a send intent if the user decides
+                to select it as an application to open their movie files. It analyzes
+                the movie file and grabs some meta data from the video file and displays
+                it onscreen.
+ */
+
 package com.ryanwahle.videoanalyzer;
 
 import android.app.Activity;
@@ -21,8 +36,12 @@ public class PlayerActivity extends Activity implements MediaPlayer.OnPreparedLi
 
         Intent intent = getIntent();
         Uri videoUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
-        Log.v("videoURI: ", "" + videoUri);
+        Log.v("onCreate: ", "videoURI: "+ videoUri);
 
+        /*
+            If the user started this app through the launcher then display
+            an alert letting them know this can't be used that way.
+         */
         if (videoUri == null) {
             AlertDialog.Builder noVideoAlertDialog = new AlertDialog.Builder(this);
 
@@ -32,6 +51,9 @@ public class PlayerActivity extends Activity implements MediaPlayer.OnPreparedLi
             noVideoAlertDialog.create().show();
         }
 
+        /*
+            Setup the video view widget and the media controller.
+         */
         VideoView playerVideoView = (VideoView) findViewById(R.id.playerVideoView);
         MediaController playerMediaController = new MediaController(this);
 
@@ -42,9 +64,12 @@ public class PlayerActivity extends Activity implements MediaPlayer.OnPreparedLi
         playerVideoView.start();
     }
 
+    /*
+        This is called when the video view has finished preparing the video.
+     */
     @Override
     public void onPrepared(MediaPlayer mediaPlayer) {
-        Log.v("MEDIA: ", "READY");
+        Log.v("onPrepared", "MEDIA READY");
 
         TextView textViewTotalDuration = (TextView) findViewById(R.id.textViewTotalDuration);
         TextView textViewVideoWidth = (TextView) findViewById(R.id.textViewVideoWidth);
