@@ -7,8 +7,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -55,6 +53,7 @@ public class Distancer extends Activity implements LocationListener, Button.OnCl
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 5, this);
 
             // Reset the total miles counter
+            oldLocation = null;
             totalMetersDistance = 0.0f;
             updateTotalMiles();
 
@@ -115,14 +114,15 @@ public class Distancer extends Activity implements LocationListener, Button.OnCl
     }
 
     private void updateTotalMiles() {
-        String totalMilesString = String.format("%.2f", totalMetersDistance * 0.00062137);
+        float totalMetersToMilesCalculationFloat = totalMetersDistance * 0.00062137f;
+        String totalMilesString = String.format("%.2f", totalMetersToMilesCalculationFloat);
 
-        //Toast.makeText(getBaseContext(), totalMilesString, Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), totalMetersToMilesCalculationFloat + "", Toast.LENGTH_LONG).show();
         myTextView.setText(totalMilesString);
 
-        //MediaPlayer niceJobMileMediaPlayer = MediaPlayer.create(getBaseContext(), R.raw.niceJobMile);
-        //niceJobMileMediaPlayer.start();
-        //niceJobMileMediaPlayer.release();
-        //niceJobMileMediaPlayer = null;
+        if ( ((totalMetersToMilesCalculationFloat % 1) == 0) && totalMetersToMilesCalculationFloat != 0) {
+            MediaPlayer niceJobMileMediaPlayer = MediaPlayer.create(getBaseContext(), R.raw.sound_mile);
+            niceJobMileMediaPlayer.start();
+        }
     }
 }
