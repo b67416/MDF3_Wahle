@@ -5,16 +5,24 @@ import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
-public class Distancer extends Activity implements LocationListener {
+public class Distancer extends Activity implements LocationListener, Button.OnClickListener {
 
     private TextView myTextView = null;
+    private Button buttonStartStopGPS = null;
+
     private Location oldLocation = null;
+    private LocationManager locationManager = null;
+
     private float totalMetersDistance = 0.0f;
 
     @Override
@@ -22,11 +30,49 @@ public class Distancer extends Activity implements LocationListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_distancer);
 
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        /*
+            Setup the location manager to enable us to start and stop
+            receiving GPS updates.
+        */
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 5, this);
+        /*
+            Setup the links to the interface
+        */
 
         myTextView = (TextView) findViewById(R.id.textView);
+
+        buttonStartStopGPS = (Button) findViewById(R.id.buttonStartStopGPS);
+        buttonStartStopGPS.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        String buttonStartStopGPSString = buttonStartStopGPS.getText().toString();
+
+        if (buttonStartStopGPSString.compareTo("Start Recording") == 0) {
+            // Start receiving GPS updates
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 5, this);
+
+            // Reset the total miles counter
+            totalMetersDistance = 0.0f;
+            updateTotalMiles();
+
+            // Change the Start/Stop button to "Stop Recording" and change
+            // background color to red.
+            buttonStartStopGPS.setText("Stop Recording");
+            buttonStartStopGPS.setTextColor(getResources().getColor(android.R.color.white));
+            buttonStartStopGPS.setBackgroundColor(getResources().getColor(android.R.color.holo_red_light));
+        } else {
+            // Stop the recording
+            locationManager.removeUpdates(this);
+
+            // Change the Start/Stop button to "Start Recording" and change
+            // background color to green.
+            buttonStartStopGPS.setText("Start Recording");
+            buttonStartStopGPS.setTextColor(getResources().getColor(android.R.color.black));
+            buttonStartStopGPS.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
+        }
     }
 
     @Override
@@ -63,26 +109,6 @@ public class Distancer extends Activity implements LocationListener {
         // Do nothing
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.my, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private void addMetersToTotalDistance(float meters) {
         totalMetersDistance = totalMetersDistance + meters;
         updateTotalMiles();
@@ -93,5 +119,10 @@ public class Distancer extends Activity implements LocationListener {
 
         //Toast.makeText(getBaseContext(), totalMilesString, Toast.LENGTH_LONG).show();
         myTextView.setText(totalMilesString);
+
+        //MediaPlayer niceJobMileMediaPlayer = MediaPlayer.create(getBaseContext(), R.raw.niceJobMile);
+        //niceJobMileMediaPlayer.start();
+        //niceJobMileMediaPlayer.release();
+        //niceJobMileMediaPlayer = null;
     }
 }
