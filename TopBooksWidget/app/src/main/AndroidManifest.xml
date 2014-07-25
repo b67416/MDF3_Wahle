@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_launcher"
         android:theme="@style/AppTheme">
 
-        <receiver android:name=".TopBooksProvider">
+        <receiver android:name="TopBooksProvider">
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_provider" />
