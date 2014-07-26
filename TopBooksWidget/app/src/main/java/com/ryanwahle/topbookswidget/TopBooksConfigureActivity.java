@@ -37,8 +37,9 @@ public class TopBooksConfigureActivity extends Activity {
     }
 
     private void buttonDoneClicked(View view) {
-        EditText editTextName = (EditText) this.findViewById(R.id.configure_editTextName);
-        Log.v("name:", editTextName.getText().toString());
+        EditText editTextName = (EditText) this.findViewById(R.id.configure_editText_firstName);
+        EditText editTextLastName = (EditText) this.findViewById(R.id.configure_editText_lastName);
+        //Log.v("name:", editTextName.getText().toString());
 
         /*
             Save the name to the shared preferences
@@ -46,7 +47,8 @@ public class TopBooksConfigureActivity extends Activity {
         SharedPreferences sharedPreferences = getSharedPreferences("TopBooksPreferences", 0);
 
         SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
-        sharedPreferencesEditor.putString("name", editTextName.getText().toString());
+        sharedPreferencesEditor.putString("first_name", editTextName.getText().toString());
+        sharedPreferencesEditor.putString("last_name", editTextLastName.getText().toString());
         sharedPreferencesEditor.commit();
 
 

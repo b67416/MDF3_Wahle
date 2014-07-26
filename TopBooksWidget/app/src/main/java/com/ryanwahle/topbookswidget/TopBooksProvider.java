@@ -32,7 +32,7 @@ public class TopBooksProvider extends AppWidgetProvider {
             */
             Intent launchDetailsActivityIntent = new Intent(context, TopBooksDetailsActivity.class);
             PendingIntent launchDetailsActivityPendingIntent = PendingIntent.getActivity(context, 0, launchDetailsActivityIntent, 0);
-            views.setOnClickPendingIntent(R.id.widget_textView_bookTitle, launchDetailsActivityPendingIntent);
+            views.setOnClickPendingIntent(R.id.widget_imageButton_bookDetails, launchDetailsActivityPendingIntent);
 
             /*
             // ***** TESTING ONLY -- Manually onUpdate code
@@ -85,8 +85,10 @@ public class TopBooksProvider extends AppWidgetProvider {
              */
             int currentBookInt = widgetSharedPreferences.getInt("current_book", 0);
             String currentBookString = widgetSharedPreferences.getString("book_" + currentBookInt, "");
-            String nameString = widgetSharedPreferences.getString("name", "");
-            views.setTextViewText(R.id.widget_textView_bookTitle, nameString + ", " + currentBookString);
+            String nameString = widgetSharedPreferences.getString("first_name", "");
+
+            views.setTextViewText(R.id.widget_textView_title, "Top Book for " + nameString);
+            views.setTextViewText(R.id.widget_textView_bookTitle, currentBookString);
 
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }

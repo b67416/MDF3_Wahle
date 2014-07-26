@@ -2,29 +2,44 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_orange_light">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="What's your name?"
-        android:id="@+id/textView" />
+        android:text="What's your first name?"
+        android:id="@+id/textView"
+        android:textColor="@android:color/black"
+        android:padding="10dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/configure_editTextName"
-        android:hint="eg: John" />
+        android:id="@+id/configure_editText_firstName"
+        android:hint="eg: John"
+        android:padding="10dp" />
 
-    <Switch
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dark Background"
-        android:id="@+id/switch1"
-        android:checked="true" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="What's your last name?"
+        android:id="@+id/textView2"
+        android:textColor="@android:color/black"
+        android:padding="10dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/configure_editText_lastName"
+        android:hint="eg: Smith"
+        android:padding="10dp" />
 
     <Button
         android:layout_width="wrap_content"

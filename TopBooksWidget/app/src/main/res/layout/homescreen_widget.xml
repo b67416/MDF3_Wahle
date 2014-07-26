@@ -3,14 +3,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
     <TextView
-        android:id="@+id/widget_textView_bookTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Top Book for"
+        android:id="@+id/widget_textView_title"
+        android:background="@android:color/holo_orange_light"
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="@android:color/black"
+        android:paddingTop="2.5dp"
+        android:paddingBottom="2.5dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingTop="5dp">
+
+        <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="The Hills Went Down"
-        android:textColor="@android:color/black" />
+        android:id="@+id/widget_imageButton_bookDetails"
+        android:background="@drawable/book_details_icon"
+        android:paddingTop="3dp"
+            android:layout_marginLeft="10dp" />
+
+
+
+            <TextView
+                android:id="@+id/widget_textView_bookTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="The Hills Went Down"
+                android:textColor="@android:color/black"
+                android:paddingTop="7dp"
+                android:paddingLeft="5dp"
+                android:textStyle="italic"
+                android:typeface="serif" />
+
+
+    </LinearLayout>
 
 
 </LinearLayout>

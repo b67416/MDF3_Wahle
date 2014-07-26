@@ -19,10 +19,15 @@ public class TopBooksDetailsActivity extends Activity {
 
         int currentBookInt = widgetSharedPreferences.getInt("current_book", 0);
         String currentBookString = widgetSharedPreferences.getString("book_" + currentBookInt, "");
+        String firstNameString = widgetSharedPreferences.getString("first_name", "");
+        String lastNameString = widgetSharedPreferences.getString("last_name", "");
 
         TextView selectedBookTextView = (TextView) findViewById(R.id.bookDetails_selectedBook);
+        TextView NameTextView = (TextView) findViewById(R.id.bookDetails_name);
+
         selectedBookTextView.setText(currentBookString);
-        
+        NameTextView.setText(firstNameString + " " + lastNameString);
+
     }
 
 }

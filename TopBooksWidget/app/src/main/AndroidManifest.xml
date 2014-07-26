@@ -16,13 +16,18 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".TopBooksConfigureActivity">
+        <activity
+            android:name=".TopBooksConfigureActivity"
+            android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".TopBooksDetailsActivity" android:label="Top Book Details" />
+        <activity
+            android:name=".TopBooksDetailsActivity"
+            android:label="Top Book Details"
+            android:theme="@android:style/Theme.NoTitleBar" />
     </application>
 
 </manifest>
