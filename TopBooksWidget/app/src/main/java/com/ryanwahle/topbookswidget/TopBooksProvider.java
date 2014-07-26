@@ -26,13 +26,15 @@ public class TopBooksProvider extends AppWidgetProvider {
             Log.v("AppWidgetProvider: " + appWidgetId, "onUpdate called");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.homescreen_widget);
 
+            /*
+                Set the onClickHandler to launch the book details when touched
+                from the widget.
+            */
+            Intent launchDetailsActivityIntent = new Intent(context, TopBooksDetailsActivity.class);
+            PendingIntent launchDetailsActivityPendingIntent = PendingIntent.getActivity(context, 0, launchDetailsActivityIntent, 0);
+            views.setOnClickPendingIntent(R.id.widget_textView_bookTitle, launchDetailsActivityPendingIntent);
 
-            //Intent defineIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
-            //PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, defineIntent, 0);
-
-            //views.setOnClickPendingIntent(R.id.widget_textView_bookTitle, pendingIntent);
-
-
+            /*
             // ***** TESTING ONLY -- Manually onUpdate code
             Intent intent = new Intent(context, TopBooksProvider.class);
             intent.setAction("MANUAL_UPDATE");
@@ -40,7 +42,7 @@ public class TopBooksProvider extends AppWidgetProvider {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
             views.setOnClickPendingIntent(R.id.widget_textView_bookTitle, pendingIntent);
             // ***** End of Manually onUpdate code
-
+            */
 
             /*
                 Get the SharedPreferences and add new ones if none exist. If they do exist

@@ -2,6 +2,7 @@ package com.ryanwahle.topbookswidget;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RemoteViews;
 
 /**
  * Created by ryanwahle on 7/24/14.
@@ -47,12 +49,20 @@ public class TopBooksConfigureActivity extends Activity {
         sharedPreferencesEditor.putString("name", editTextName.getText().toString());
         sharedPreferencesEditor.commit();
 
+
+
         /*
             Report back to the widget saying everything went OK
          */
         Intent resultValue = new Intent();
         resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
         setResult(RESULT_OK, resultValue);
+
+        Intent updateWidgetIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null, this, TopBooksProvider.class);
+        updateWidgetIntent.setAction("MANUAL_UPDATE");
+        updateWidgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[] {mAppWidgetId});
+        sendBroadcast(updateWidgetIntent);
+
         finish();
     }
 }

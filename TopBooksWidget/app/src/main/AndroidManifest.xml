@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".TopBooksDetailsActivity" android:label="Top Book Details" />
     </application>
 
 </manifest>
