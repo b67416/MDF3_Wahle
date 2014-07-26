@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -25,25 +26,25 @@ public class TopBooksProvider extends AppWidgetProvider {
             Log.v("AppWidgetProvider: " + appWidgetId, "onUpdate called");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.homescreen_widget);
 
+
             //Intent defineIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
             //PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, defineIntent, 0);
 
             //views.setOnClickPendingIntent(R.id.widget_textView_bookTitle, pendingIntent);
 
-            /*
-                Manually onUpdate code
-             */
+
+            // ***** TESTING ONLY -- Manually onUpdate code
             Intent intent = new Intent(context, TopBooksProvider.class);
             intent.setAction("MANUAL_UPDATE");
 
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
             views.setOnClickPendingIntent(R.id.widget_textView_bookTitle, pendingIntent);
-            /*
-                End of Manually onUpdate code
-             */
+            // ***** End of Manually onUpdate code
+
 
             /*
-                Get the SharedPreferences and add new ones if none exist
+                Get the SharedPreferences and add new ones if none exist. If they do exist
+                then increment the current_book counter.
              */
             SharedPreferences widgetSharedPreferences = context.getSharedPreferences("TopBooksPreferences", 0);
             if (widgetSharedPreferences.contains("book_1") == false) {
@@ -52,18 +53,40 @@ public class TopBooksProvider extends AppWidgetProvider {
                 SharedPreferences.Editor widgetSharedPreferencesEditor = widgetSharedPreferences.edit();
 
                 widgetSharedPreferencesEditor.putInt("current_book", 1);
-                widgetSharedPreferencesEditor.putString("book_1", "");
-                widgetSharedPreferencesEditor.putString("book_2", "");
-                widgetSharedPreferencesEditor.putString("book_3", "");
-                widgetSharedPreferencesEditor.putString("book_4", "");
+                widgetSharedPreferencesEditor.putString("book_1", "If I Stay");
+                widgetSharedPreferencesEditor.putString("book_2", "The Fault in Our Stars");
+                widgetSharedPreferencesEditor.putString("book_3", "Frozen Little Golden Book");
+                widgetSharedPreferencesEditor.putString("book_4", "The Giver");
 
                 widgetSharedPreferencesEditor.commit();
 
             } else {
-                Log.v("widget:", "book data found!");
+                int currentBookInt = widgetSharedPreferences.getInt("current_book", 0);
+
+                /*
+                    If the current book counter is greater than 4, then there are no
+                    more books, so set it back to the beginning.
+                 */
+                currentBookInt = currentBookInt + 1;
+                if (currentBookInt > 4) {
+                    currentBookInt = 1;
+                }
+
+                SharedPreferences.Editor widgetSharedPreferencesEditor = widgetSharedPreferences.edit();
+                widgetSharedPreferencesEditor.putInt("current_book", currentBookInt);
+                widgetSharedPreferencesEditor.commit();
             }
 
-            this.updateAppWidget(appWidgetManager, appWidgetId, views);
+
+            /*
+                Set the book to the widget textView
+             */
+            int currentBookInt = widgetSharedPreferences.getInt("current_book", 0);
+            String currentBookString = widgetSharedPreferences.getString("book_" + currentBookInt, "");
+            String nameString = widgetSharedPreferences.getString("name", "");
+            views.setTextViewText(R.id.widget_textView_bookTitle, nameString + ", " + currentBookString);
+
+            appWidgetManager.updateAppWidget(appWidgetId, views);
         }
     }
 
@@ -85,7 +108,5 @@ public class TopBooksProvider extends AppWidgetProvider {
 
            onUpdate(context, appWidgetManager, appWidgetIds);
        }
-
-
    }
 }

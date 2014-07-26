@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_launcher"
         android:theme="@style/AppTheme">
 
-        <receiver android:name="TopBooksProvider">
+        <receiver android:name=".TopBooksProvider">
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_provider" />
@@ -15,6 +15,12 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".TopBooksConfigureActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
 
     </application>
 
