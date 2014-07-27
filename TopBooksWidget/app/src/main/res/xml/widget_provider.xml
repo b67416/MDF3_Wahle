@@ -5,5 +5,4 @@
     android:minHeight="40dp"
     android:updatePeriodMillis="3600000"
     android:initialLayout="@layout/homescreen_widget"
-    android:configure="com.ryanwahle.topbookswidget.TopBooksConfigureActivity"
-    android:resizeMode="vertical"/>
+    android:configure="com.ryanwahle.topbookswidget.TopBooksConfigureActivity" />
