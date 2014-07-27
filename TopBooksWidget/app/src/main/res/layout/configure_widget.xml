@@ -21,7 +21,8 @@
         android:ems="10"
         android:id="@+id/configure_editText_firstName"
         android:hint="eg: John"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:background="@android:color/holo_orange_light" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -39,7 +40,8 @@
         android:ems="10"
         android:id="@+id/configure_editText_lastName"
         android:hint="eg: Smith"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:background="@android:color/holo_orange_light" />
 
     <Button
         android:layout_width="wrap_content"
