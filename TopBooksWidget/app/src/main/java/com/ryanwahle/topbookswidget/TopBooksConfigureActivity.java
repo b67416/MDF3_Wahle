@@ -1,23 +1,35 @@
+/*
+    Author:     Ryan Wahle
+
+    Project:    Top Books Widget
+
+    Package:    com.ryanwahle.topbookswidget
+
+    File:       TopBooksConfigureActivity.java
+
+    Purpose:    This activity is launched when the user first places
+                a new widget on their home screen. It allows the user
+                to enter their first and last name to add a little
+                personalization to the widget.
+ */
+
 package com.ryanwahle.topbookswidget;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RemoteViews;
 
-/**
- * Created by ryanwahle on 7/24/14.
- */
 public class TopBooksConfigureActivity extends Activity {
     private int mAppWidgetId;
 
+    /*
+        This method is called when the activity is first created.
+    */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.configure_widget);
@@ -36,6 +48,10 @@ public class TopBooksConfigureActivity extends Activity {
         }
     }
 
+    /*
+        When the user is done entering their first and last name, they click the
+        done button which calls this method.
+    */
     private void buttonDoneClicked(View view) {
         EditText editTextName = (EditText) this.findViewById(R.id.configure_editText_firstName);
         EditText editTextLastName = (EditText) this.findViewById(R.id.configure_editText_lastName);

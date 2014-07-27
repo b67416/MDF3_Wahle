@@ -1,3 +1,17 @@
+/*
+    Author:     Ryan Wahle
+
+    Project:    Top Books Widget
+
+    Package:    com.ryanwahle.topbookswidget
+
+    File:       TopBooksProvider.java
+
+    Purpose:    This is the code that provides data for the widget
+                to display. It handles everything from setting up
+                the appwidget interface to refreshing it.
+ */
+
 package com.ryanwahle.topbookswidget;
 
 import android.app.PendingIntent;
@@ -7,17 +21,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-/**
- * Created by ryanwahle on 7/24/14.
- */
 public class TopBooksProvider extends AppWidgetProvider {
 
+    /*
+        Called by the OS when the widget is to be updating.
+    */
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         final int numberOfAppWidgetIds = appWidgetIds.length;
 
@@ -34,15 +45,24 @@ public class TopBooksProvider extends AppWidgetProvider {
             PendingIntent launchDetailsActivityPendingIntent = PendingIntent.getActivity(context, 0, launchDetailsActivityIntent, 0);
             views.setOnClickPendingIntent(R.id.widget_imageButton_bookDetails, launchDetailsActivityPendingIntent);
 
-            /*
-            // ***** TESTING ONLY -- Manually onUpdate code
-            Intent intent = new Intent(context, TopBooksProvider.class);
-            intent.setAction("MANUAL_UPDATE");
+            /* * * * *
+                This is TESTING CODE ONLY.
 
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-            views.setOnClickPendingIntent(R.id.widget_textView_bookTitle, pendingIntent);
-            // ***** End of Manually onUpdate code
-            */
+                It is used to allow the developer to click on the book title
+                and have it refresh the widget. This way we do not have to wait
+                the full hour to make sure our books get updated on the widget
+                user interface.
+            * * * * */
+
+            //Intent intent = new Intent(context, TopBooksProvider.class);
+            //intent.setAction("MANUAL_UPDATE");
+
+            //PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+            //views.setOnClickPendingIntent(R.id.widget_textView_bookTitle, pendingIntent);
+
+            /* * * * *
+                End of Manually onUpdate code
+            * * * * */
 
             /*
                 Get the SharedPreferences and add new ones if none exist. If they do exist
@@ -90,15 +110,20 @@ public class TopBooksProvider extends AppWidgetProvider {
             views.setTextViewText(R.id.widget_textView_title, "Top Book for " + nameString);
             views.setTextViewText(R.id.widget_textView_bookTitle, currentBookString);
 
+            /*
+                Refresh the widget UI
+            */
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
     }
 
-   private void updateAppWidget(AppWidgetManager appWidgetManager, int appWidgetId, RemoteViews views) {
-       Log.v("AppWidgetProvider: " + appWidgetId, "updateAppWidget called");
-       appWidgetManager.updateAppWidget(appWidgetId, views);
-   }
+   /*
+        This is called when there is a manual broadcast sent via our
+        widget to update the user interface.
 
+        eg. the initial update after configuring the widget.
+        eg. when the testing code is uncommented to simulate an update broadcast.
+   */
    @Override
    public void onReceive(Context context, Intent intent) {
        super.onReceive(context, intent);

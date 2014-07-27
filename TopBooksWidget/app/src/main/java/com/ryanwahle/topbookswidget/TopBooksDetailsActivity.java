@@ -1,16 +1,32 @@
+/*
+    Author:     Ryan Wahle
+
+    Project:    Top Books Widget
+
+    Package:    com.ryanwahle.topbookswidget
+
+    File:       TopBooksDetailsActivity.java
+
+    Purpose:    This activity is called when the user clicks
+                on the book icon from the widget. It displays
+                the name of the book and the users first and
+                last name.
+ */
+
 package com.ryanwahle.topbookswidget;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
-/**
- * Created by ryanwahle on 7/25/14.
- */
 public class TopBooksDetailsActivity extends Activity {
 
+    /*
+        Called when the activity is created. It grabs the users
+        first name, last name, and book title and displays it on
+        the screen with a graphic.
+    */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.book_details_activity);
