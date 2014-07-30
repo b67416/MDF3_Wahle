@@ -2,43 +2,26 @@
 <html xmlns="http://www.w3.org/1999/html">
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
-		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
         <script src="getmehome.js"></script>
     </head>
-	<body>
-		<div data-role="page" id="pageDestination">
-			<div data-role="header">
-				<h1>Enter Destination Address</h1>
-			</div>
+	<body onload="destinationPageLoad()">
+	    <h1>Enter Destination Address</h1>
 
-			<div data-role="main" class="ui-content">	
-				<div class="ui-field-contain">
-					<label for="destinationAddress">Street Address:</label>
-					<input id="destinationAddress" name="destinationAddress" type="text">
-				</div>
-
-				<div class="ui-field-contain">
-					<label for="destinationCity">City:</label>
-					<input id="destinationCity" name="destinationCity" type="text">
-				</div>
-
-				<div class="ui-field-contain">
-					<label for="destinationState">State:</label>
-					<input id="destinationState" name="destinationState" type="text">
-				</div>
-
-				<div class="ui-field-contain">
-					<label for="destinationZip">Zip Code:</label>
-					<input id="destinationZip" name="destinationZip" type="text">
-				</div>
-	
-				<center>
-					<a href="" onclick="myFunction()" class="ui-btn ui-btn-inline">Save</a>
-					<a href="index.html" class="ui-btn ui-btn-inline">Cancel</a>
-				</center>
-			</div>
-		</div>
-	</body>
+        <label for="destinationStreetAddress">Street Address:</label>
+		<input id="destinationStreetAddress" name="destinationStreetAddress" type="text">
+        <br>
+        <label for="destinationCity">City:</label>
+		<input id="destinationCity" name="destinationCity" type="text">
+        <br>
+        <label for="destinationState">State:</label>
+		<input id="destinationState" name="destinationState" type="text">
+        <br>
+        <label for="destinationZipCode">Zip Code:</label>
+		<input id="destinationZipCode" name="destinationZip" type="text">
+        <br>
+        <center>
+			<a href="index.html" onclick="saveDestination()">Save</a>
+            <a href="index.html">Cancel</a>
+		</center>
+		</body>
 </html>
