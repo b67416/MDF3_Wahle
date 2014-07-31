@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 	<head>
+        <link rel="stylesheet" href="pure-release-0.5.0/pure-nr.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <script src="getmehome.js"></script>
     </head>
 	<body onload="destinationPageLoad()">
-	    <h1>Enter Destination Address</h1>
 
-        <label for="destinationStreetAddress">Street Address:</label>
-		<input id="destinationStreetAddress" name="destinationStreetAddress" type="text">
-        <br>
-        <label for="destinationCity">City:</label>
-		<input id="destinationCity" name="destinationCity" type="text">
-        <br>
-        <label for="destinationState">State:</label>
-		<input id="destinationState" name="destinationState" type="text">
-        <br>
-        <label for="destinationZipCode">Zip Code:</label>
-		<input id="destinationZipCode" name="destinationZip" type="text">
-        <br>
-        <center>
-			<a href="index.html" onclick="saveDestination()">Save</a>
-            <a href="index.html">Cancel</a>
-		</center>
-		</body>
+    <header>
+        <h2 class="content-head is-center">Destination Address</h2>
+    </header>
+        <form class="pure-form">
+            <fieldset class="pure-group">
+                <input id="destinationStreetAddress" class="pure-input-1" type="text" placeholder="123 Smith Street">
+		        <input id="destinationCity" class="pure-input-1" type="text" placeholder="Temple City">
+                <input id="destinationState" class="pure-input-1" type="text" placeholder="CA">
+                <input id="destinationZipCode" class="pure-input-1" type="text" placeholder="95001">
+		    </fieldset>
+
+            <a class="pure-button pure-button-primary pure-input-1 is-center" href="index.html" onclick="saveDestination()">Save</a>
+            <a class="pure-button pure-input-1 is-center" href="index.html">Cancel</a>
+        </form>
+	</body>
 </html>
