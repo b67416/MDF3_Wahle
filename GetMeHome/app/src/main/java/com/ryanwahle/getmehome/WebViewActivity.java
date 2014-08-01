@@ -1,3 +1,22 @@
+/*
+    Author:     Ryan Wahle
+
+    Project:    Get Me Home
+
+    Package:    com.ryanwahle.getmehome
+
+    File:       WebAppInterface.java
+
+    Purpose:    This is the starting class that sets up the WebView
+                and loads the HTML interface into the application.
+
+                The graphics for this app were downloaded as free
+                icons from findicons.com
+
+                The CSS framework used in this app is from purecss.io
+
+ */
+
 package com.ryanwahle.getmehome;
 
 import android.app.Activity;

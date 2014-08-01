@@ -1,3 +1,17 @@
+/*
+    Author:     Ryan Wahle
+
+    Project:    Get Me Home
+
+    Package:    com.ryanwahle.getmehome
+
+    File:       WebAppInterface.java
+
+    Purpose:    This class provides an interface between the GUI's javascript
+                code and the native Android code.
+
+ */
+
 package com.ryanwahle.getmehome;
 
 
@@ -25,6 +39,10 @@ public class WebAppInterface {
         sharedPreferences = mContext.getSharedPreferences(PREF_APP, 0);
     }
 
+    /*
+        Check to see if the user has supplied all fields for the address and return
+        true or false.
+    */
     @JavascriptInterface
     public boolean isDestinationSet() {
         if (sharedPreferences.getString(PREF_STREET_ADDRESS, "").isEmpty() || sharedPreferences.getString(PREF_CITY, "").isEmpty() || sharedPreferences.getString(PREF_STATE, "").isEmpty() || sharedPreferences.getString(PREF_ZIP_CODE, "").isEmpty()) {
@@ -34,6 +52,10 @@ public class WebAppInterface {
         }
     }
 
+    /*
+        Creates an intent to start Google Maps and sends the destination address with
+        that intent so Maps can provide directions.
+    */
     @JavascriptInterface
     public void loadMapApplication() {
         String destinationAddressForUriString = "http://maps.google.com/maps?daddr=";
@@ -47,11 +69,18 @@ public class WebAppInterface {
         mContext.startActivity(mapWithDestinationIntent);
     }
 
+    /*
+        Allows the javascript code to display a Toast.
+    */
     @JavascriptInterface
     public void showToast(String toast) {
         Toast.makeText(mContext, toast, Toast.LENGTH_LONG).show();
     }
 
+    /*
+        The rest of the methods provide setters and getters to either
+        set or retrieve the address from the SharedPreferences.
+    */
     @JavascriptInterface
     public void setDestinationStreetAddress(String stringToSave) {
         Log.v("Saved", "Street Address: " + stringToSave);
